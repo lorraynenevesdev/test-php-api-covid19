@@ -31,7 +31,7 @@ function drawVisualization() {
 
 function sizeOfThings() {
     chartWidth = parseInt(window.innerWidth / 2) - 10;
-    chartHeight = parseInt(window.innerHeight / 2) - 10;
+    chartHeight = parseInt(window.innerHeight / 2) + 80;
 
 };
 
