@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid-19 info</title>
+
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+    // Carrega dados da api para o javascript
+    const apiDataJson = JSON.parse(`<?php echo $this->apiDataJson; ?>`);
+    var chartWidth = parseInt(window.innerWidth / 2) - 10;
+    var chartHeight = parseInt(window.innerHeight / 2) - 10;
+</script>
+<script src="/public/js/grafico.js"></script>
+
+<link href="/public/css/home.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h1>Coranavírus</h1>
+
+        </div>
+
+        <div class="information">
+            <h2>
+                Informação da última atualização da Covid-19 por estado
+            </h2>
+            <p>
+                Posicione o cursor sob seu estado no gráfico abaixo, para obter o status do vírus em sua região.
+            </p>
+            <div id="visualization" style="margin: 0 auto; width: 800px; height: 600; align-items: center; background-color: #ddd;"> </div>
+
+            <p  class="info-legend" id="dateUpdate">Data de atualização:
+                <?php print($this->apiData['lastUpdatedAtSource']); ?>
+            </p>
+        </div>
+
+
+        <div class="information" id="information-table">
+            <h2>Informações da Covid-19 por estado</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sigla</th>
+                        <th>Estado</th>
+                        <th>Infectados</th>
+                        <th>Mortes</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <?php foreach ($this->apiData['dataListCovid'] as $infoCovid) : ?>
+                    <tr>
+                        <td>
+                            <?php print($infoCovid['acronym']); ?>
+                        </td>
+                        <td>
+                            <?php print($infoCovid['state']); ?>
+                        </td>
+                        <td>
+                            <?php print($infoCovid['infected']); ?>
+                        </td>
+                        <td>
+                            <?php print($infoCovid['deaded']); ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+
+            <p class="info-legend" id="font-api" >
+                Fonte: https://covid.saude.gov.br/
+                
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        
+    </footer>
+</body>
+
+</html>
